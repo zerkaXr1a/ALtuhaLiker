@@ -1,0 +1,36 @@
+<aside class="sidebar">
+    <div class="logo">
+        <i class="fas fa-robot"></i>
+        <span>altuha trainer</span>
+    </div>
+    <nav class="nav">
+        <button class="nav-btn active" data-tab="pending">
+            <i class="fas fa-hourglass-half"></i>
+            <span>Очередь</span>
+            <span class="badge" id="pendingCount">0</span>
+        </button>
+        <button class="nav-btn" data-tab="labeled">
+            <i class="fas fa-check-double"></i>
+            <span>Размечено</span>
+            <span class="badge" id="labeledCount">0</span>
+        </button>
+        <button class="nav-btn" data-tab="rejected">
+            <i class="fas fa-ban"></i>
+            <span>Отклонено</span>
+            <span class="badge" id="rejectedCount">0</span>
+        </button>
+        <button class="nav-btn" data-tab="liker">
+            <i class="fas fa-heart"></i>
+            <span>Лайкер</span>
+            <span class="badge" id="likerStatusBadge">⚪</span>
+        </button>
+    </nav>
+    <div class="sidebar-footer">
+        <button id="collectBtn" class="btn-primary">
+            <i class="fas fa-cloud-download-alt"></i> Собрать фото
+        </button>
+        <button id="trainBtn" class="btn-secondary" style="margin-top: 10px;">
+            <i class="fas fa-brain"></i> Обучить модель
+        </button>
+    </div>
+</aside>

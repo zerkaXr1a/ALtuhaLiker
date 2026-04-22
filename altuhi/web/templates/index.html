@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}altuha trainer · Разметка датасета{% endblock %}
+
+{% block content %}
+<header class="header">
+    <div class="header-left">
+        <h1 class="page-title" id="pageTitle">Очередь на разметку</h1>
+    </div>
+    <div class="header-right">
+        <div id="collectStatus" class="collect-status"></div>
+        <button id="refreshBtn" class="btn-icon" title="Обновить"><i class="fas fa-sync-alt"></i></button>
+    </div>
+</header>
+
+<div id="notificationArea" class="notification-area"></div>
+
+<div class="meme-grid" id="imageGrid"></div>
+<div id="emptyState" class="empty-state">
+    <i class="fas fa-inbox fa-3x"></i>
+    <p>Здесь пока ничего нет</p>
+    <p class="hint">Нажми «Собрать фото», чтобы начать</p>
+</div>
+
+<div id="likerPanel" style="display: none;">
+    <div class="card" style="margin-bottom: 20px;">
+        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
+            <button class="btn-primary" id="likerStartBtn"><i class="fas fa-play"></i> Запустить бота</button>
+            <button class="btn-danger" id="likerStopBtn"><i class="fas fa-stop"></i> Остановить</button>
+            <span id="likerStatusText" class="status-stopped">⚪ Остановлен</span>
+        </div>
+        <div class="stats-grid" style="grid-template-columns: repeat(5, 1fr);">
+            <div class="stat-card"><div>🔄 Скроллы</div><div class="stat-value" id="likerScrolls">0</div></div>
+            <div class="stat-card"><div>📸 Обработано</div><div class="stat-value" id="likerProcessed">0</div></div>
+            <div class="stat-card"><div>❤️ Лайков</div><div class="stat-value" id="likerLiked">0</div></div>
+            <div class="stat-card"><div>❌ Ошибок</div><div class="stat-value" id="likerFailed">0</div></div>
+            <div class="stat-card"><div>🎯 Порог</div><div class="stat-value" id="likerThreshold">0.44</div></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>❤️ Последние лайкнутые</h2>
+        <div class="meme-grid" id="likedGrid"></div>
+    </div>
+
+    <div class="card">
+        <h2>🧪 Тест фото</h2>
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <div style="flex:1; min-width: 200px;">
+                <label class="file-label" for="testImageInput" style="display: inline-block; background: var(--accent); padding: 10px 20px; border-radius: 30px; cursor: pointer;">
+                    <i class="fas fa-upload"></i> Выбрать файл
+                </label>
+                <input type="file" id="testImageInput" accept="image/*" style="display:none;">
+                <div style="margin-top:15px;">
+                    <input type="text" id="testImageUrl" placeholder="https://...jpg" style="width: 100%; padding: 10px; background: #333; color: white; border: 1px solid #444; border-radius: 8px;">
+                </div>
+                <button class="btn-secondary" id="testUrlBtn" style="margin-top:10px;"><i class="fas fa-search"></i> Проверить URL</button>
+            </div>
+            <div style="flex:1; text-align:center;">
+                <img id="testPreviewImg" style="max-width:100%; max-height:200px; display:none; border-radius:12px;">
+                <div id="testResult" style="margin-top:15px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="collectModal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content" style="max-width: 500px;">
+        <button class="modal-close">&times;</button>
+        <h2 style="margin-bottom: 20px;">Сбор изображений</h2>
+        <div style="margin-bottom: 15px;">
+            <label>Категория:</label>
+            <select id="collectCategory" style="width:100%; padding:10px; background:#333; color:#fff; border:1px solid #444; border-radius:8px;">
+                <option value="alt_girls">Альтухи (девушки)</option>
+                <option value="not_alt">Не альтухи (пейзажи, еда)</option>
+            </select>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label>Поисковый запрос (опционально):</label>
+            <input type="text" id="collectSearch" placeholder="например, goth girl" style="width:100%; padding:10px; background:#333; color:#fff; border:1px solid #444; border-radius:8px;">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label>Количество (0 = бесконечно):</label>
+            <input type="number" id="collectCount" value="30" min="0" style="width:100%; padding:10px; background:#333; color:#fff; border:1px solid #444; border-radius:8px;">
+        </div>
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button class="btn-secondary" id="collectStopBtn" style="display:none;">⏹️ Остановить</button>
+            <button class="btn-primary" id="collectStartBtn">▶️ Начать сбор</button>
+        </div>
+        <div id="collectProgress" style="margin-top: 15px;"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+</script>
+{% endblock %}
